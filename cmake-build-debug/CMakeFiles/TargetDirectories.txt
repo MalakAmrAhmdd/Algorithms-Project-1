@@ -1,5 +1,5 @@
-C:/C++ Projects/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Fibonacci.dir
-C:/C++ Projects/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Search.dir
-C:/C++ Projects/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Heap.dir
-C:/C++ Projects/Algorithms-Project-1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/C++ Projects/Algorithms-Project-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/DELL/Documents/GitHub/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Fibonacci.dir
+C:/Users/DELL/Documents/GitHub/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Search.dir
+C:/Users/DELL/Documents/GitHub/Algorithms-Project-1/cmake-build-debug/CMakeFiles/Heap.dir
+C:/Users/DELL/Documents/GitHub/Algorithms-Project-1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/DELL/Documents/GitHub/Algorithms-Project-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
