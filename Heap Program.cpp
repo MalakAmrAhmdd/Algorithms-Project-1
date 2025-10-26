@@ -2,16 +2,13 @@
 #define ll long long
 using namespace std;
 
-void print(int arr[],int n){
-    for (int i = 0; i < n; ++i) {
-        cout << arr[i] <<  " ";
-    }
-    cout << endl;
-}
 
+static const int cap = 100;
 class Heap{
+    int arr[cap];
+    int n = 0;
 public:
-    void heapify(int arr[],int n , int i){
+    void heapify(int i){
         int left = 2 * i +1;
         int right = 2 * i +2;
         int maxx = i;
@@ -23,21 +20,21 @@ public:
         }
         if(maxx!=i){
             swap(arr[i], arr[maxx]);
-            heapify(arr,n,maxx);
+            heapify(maxx);
         }
     }
-    void buildheap(int arr[], int n){
+    void buildheap(){
         for (int i = n/2 - 1; i >=0 ; i--) {
-            heapify(arr, n, i);
+            heapify(i);
         }
     }
-    void insert(int arr[], int& n, int key){
+    void insert(int key){
         n++;
         arr[n-1] = key;
-        buildheap(arr, n);
+        buildheap();
     }
 
-    ll extractMax(int arr[], int& n){
+    ll extractMax(){
         if(n <= 0) return -1;
         if(n == 1){
             n--;
@@ -47,11 +44,11 @@ public:
         arr[0] = arr[n-1];
         n--;
 //        heapify(arr,n,0);
-        buildheap(arr, n);
+        buildheap();
         return root;
     }
 
-    ll extractMin(int arr[], int& n){
+    ll extractMin(){
         if(n <= 0) return -1;
         if(n == 1){
             n--;
@@ -66,27 +63,50 @@ public:
         }
         swap(arr[n-1],arr[min_idx]);
         n--;
-        buildheap(arr, n);
+        buildheap();
         return min;
     }
-};
 
+    void print(){
+        for (int i = 0; i < n; ++i) {
+            cout << arr[i] <<  " ";
+        }
+        cout << endl;
+    }
+};
 class PriorityQueue {
-    struct Node {
-        int data;
-        int priority;
-        Node* next;
-    };
+    Heap heap;
+//    int arr[cap];
+//    int n;
+public:
+    void enqueue(int element){
+        heap.insert(element);
+    }
+
+    ll dequeueMax(){
+        return heap.extractMax();
+    }
+
+    ll dequeueMin(){
+        return heap.extractMin();
+    }
+
+    void print(){
+        heap.print();
+    }
+
 };
 
 class HeapSort {
+    int arr[cap];
+    int n;
 public:
-    void heapSort(int arr[] ,int n){
+    void heapSort(){
         Heap h;
-        h.buildheap(arr,n);
+        h.buildheap();
         for (int i = n - 1; i >=0 ; i--) {
             swap(arr[0] , arr[i]);
-            h.heapify(arr,i,0);
+            h.heapify(i);
         }
     }
 };
@@ -94,85 +114,114 @@ public:
 
 int main() {
 //    int arr[] = {12, 11, 13, 5, 6, 7};
-//    int n = sizeof(arr)/sizeof(arr[0]);
-//    HeapSort hs;
-//    Heap h;
-//
-////    hs.heapSort(arr, n);
-////    print(arr, n);
-////    cout<< "The max is "<<h.extractMax(arr, n) << endl;
-////    cout<< "The min is "<<h.extractMin(arr, n) << endl;
-//    h.insert(arr, n, 15);
-//    h.buildheap(arr,n);
-//    print(arr, n);
+
     Heap h;
     HeapSort hs;
     PriorityQueue pq;
 
-    cout<< "Enter the number of elements in the heap: ";
-    int n;
-    cin >> n;
-    int arr[n];
-    cout << "Enter the elements of the heap: ";
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
-    h.buildheap(arr, n);
-    while(true){
-        cout << "Choose an operation:" << endl;
-        cout << "1. Insert element into heap" << endl;
-        cout << "2. Extract max from heap" << endl;
-        cout << "3. Extract min from heap" << endl;
-        cout << "4. Heap Sort" << endl;
-        cout << "5. Exit" << endl;
+//    cout << "Enter the number of elements in the heap: ";
+//    int n;
+//    cin >> n;
+//    int arr[n];
+//    cout << "Enter the elements of the heap: ";
+//    for (int i = 0; i < n; i++) {
+//        int in; cin >> in;
+//        h.insert(in);
+//    }
+//    h.buildheap();
+
+    while (true) {
+        cout << "\nChoose an operation:\n";
+        cout << "1. Heap - Insert element\n";
+        cout << "2. Heap - Extract max\n";
+        cout << "3. Heap - Extract min\n";
+        cout << "4. Heap - Rebuild heap (buildheap)\n";
+        cout << "5. Heap - Print\n";
+        cout << "6. HeapSort current array\n";
+        cout << "7. PriorityQueue - Enqueue\n";
+        cout << "8. PriorityQueue - Dequeue max\n";
+        cout << "9. PriorityQueue - Dequeue min\n";
+        cout << "10. Print current Priority Queue\n";
+        cout << "11. Exit\n";
         int choice;
         cin >> choice;
-        if(choice == 5) break;
-        switch(choice){
-            case 1:{
+        if (choice == 11) break;
+
+        switch (choice) {
+            case 1: {
                 int key;
                 cout << "Enter element to insert: ";
                 cin >> key;
-                h.insert(arr, n, key);
+                h.insert(key);
                 cout << "Heap after insertion: ";
-                print(arr, n);
+                h.print();
                 break;
             }
-            case 2:{
-                ll maxVal = h.extractMax(arr, n);
-                if(maxVal != -1){
-                    cout << "Extracted max: " << maxVal << endl;
-                    cout << "Heap after extraction: ";
-                    print(arr, n);
+            case 2: {
+                ll maxVal = h.extractMax();
+                if (maxVal != -1) {
+                    cout << "Extracted max: " << maxVal << "\nHeap after extraction: ";
+                    h.print();
                 } else {
-                    cout << "Heap is empty!" << endl;
+                    cout << "Heap is empty!\n";
                 }
                 break;
             }
-            case 3:{
-                ll minVal = h.extractMin(arr, n);
-                if(minVal != -1){
-                    cout << "Extracted min: " << minVal << endl;
-                    cout << "Heap after extraction: ";
-                    print(arr, n);
+            case 3: {
+                ll minVal = h.extractMin();
+                if (minVal != -1) {
+                    cout << "Extracted min: " << minVal << "\nHeap after extraction: ";
+                    h.print();
                 } else {
-                    cout << "Heap is empty!" << endl;
+                    cout << "Heap is empty!\n";
                 }
                 break;
             }
-            case 4:{
-                int size = n;
-                hs.heapSort(arr, size);
+            case 4: {
+                h.buildheap();
+                cout << "Heap rebuilt.\nCurrent heap: ";
+                h.print();
+                break;
+            }
+            case 5: {
+                cout << "Heap: ";
+                h.print();
+                break;
+            }
+            case 6: {
+                hs.heapSort();
                 cout << "Sorted array: ";
-                print(arr, size);
+                h.print();
+                break;
+            }
+            case 7: {
+                int x;
+                cout << "Enter element to enqueue (priority is the value itself): ";
+                cin >> x;
+                pq.enqueue(x);
+                cout << "Enqueued.\n";
+                break;
+            }
+            case 8: {
+                ll v = pq.dequeueMax();
+                if (v != -1) cout << "Dequeued max: " << v << "\n";
+                else cout << "PriorityQueue is empty!\n";
+                break;
+            }
+            case 9: {
+                ll v = pq.dequeueMin();
+                if (v != -1) cout << "Dequeued min: " << v << "\n";
+                else cout << "PriorityQueue is empty!\n";
+                break;
+            }
+            case 10: {
+                cout << "Current Priority Queue elements: ";
+                pq.print();
                 break;
             }
             default:
-                cout << "Invalid choice! Please try again." << endl;
+                cout << "Invalid choice! Please try again.\n";
         }
     }
-
-
-
     return 0;
 }
