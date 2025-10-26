@@ -113,22 +113,10 @@ public:
 
 
 int main() {
-//    int arr[] = {12, 11, 13, 5, 6, 7};
-
+    cout << "Welcome to the Heap Program!" << endl;
     Heap h;
     HeapSort hs;
     PriorityQueue pq;
-
-//    cout << "Enter the number of elements in the heap: ";
-//    int n;
-//    cin >> n;
-//    int arr[n];
-//    cout << "Enter the elements of the heap: ";
-//    for (int i = 0; i < n; i++) {
-//        int in; cin >> in;
-//        h.insert(in);
-//    }
-//    h.buildheap();
 
     while (true) {
         cout << "\nChoose an operation:\n";
