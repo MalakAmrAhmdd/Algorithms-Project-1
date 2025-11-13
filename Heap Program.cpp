@@ -127,7 +127,7 @@ int main() {
     cout << "Welcome to the Heap Program!" << endl;
     Heap<int> h;
     HeapSort<int> hs;
-    PriorityQueueVP pq;          // value + priority version
+    PriorityQueueVP pq;
 
     while (true) {
         cout << "\nChoose an operation:\n";
